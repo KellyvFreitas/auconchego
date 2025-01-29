@@ -56,7 +56,7 @@ import FormasAjudar from "components/FormasAjudar.vue";
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 40vw;
+  max-width: 50vw;
   width: 100%;
 }
 
