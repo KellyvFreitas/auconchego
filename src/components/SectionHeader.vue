@@ -19,7 +19,7 @@
       <h4><text-highlight color="#F6CB89">Vamos unir patinhas e corações!</text-highlight> 🐾</h4>
     </q-card-section>
     <q-card-section class="flex-center flex">
-      <div class="flex flex-column align-center Card">
+      <div class="flex flex-column align-center Card" style="width: 30vh; height: 55vh; border-color: #CE8E41FF">
         <img style="width: 200px; border-radius: 100px; height: 200px" src="src/assets/doguinho.jpg">
         <h6 style="margin-top: 10px;"><strong>Pronto para adotar?</strong></h6>
         <p style="margin-top: 10px;">Entre em contato conosco!</p>
@@ -32,8 +32,8 @@
         <img style="width: 200px; border-radius: 100px; height: 200px" src="src/assets/doguinho.jpg">
         <h6 style="margin-top: 10px;"><strong>Quer se tornar um herói voluntário?</strong></h6>
         <p style="margin-top: 10px;">Seja presencial ou virtual toda ajuda é essencial para eles!</p>
-        <div class="flex justify-end" style="margin-top: 10px;">
-          <q-btn :ripple="false" no-caps style="width: 20vh; background-color: #CE8E41FF; color: white; font-size: 14px; border-radius: 20px;">Quero Ajudar</q-btn>
+        <div class="flex justify-end">
+          <q-btn :ripple="false" no-caps style="width: 15vh; background-color: #CE8E41FF; color: white; font-size: 14px; border-radius: 20px;">Quero Ajudar</q-btn>
         </div>
       </div>
 
