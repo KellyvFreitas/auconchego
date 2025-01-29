@@ -30,7 +30,7 @@
         </div>
 
         <!-- Redes Sociais -->
-        <div class="footer-item footer-socials">
+        <div class="footer-item footer-socials q-mt-lg">
           <img src="src/assets/instagram.png" alt="Instagram" />
           <img src="src/assets/whatsapp.webp" alt="WhatsApp" />
           <img src="src/assets/facebook.png" alt="Facebook" />
@@ -54,7 +54,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  clip-path: path('M0,350 L0,150 Q600,50 1200,100 T2400,100 L2400,350 Z');
+  clip-path: path('M0,50 L0,150 Q700,50 1300,100 T2400,100 L2400,350 Z');
   box-sizing: border-box;
 }
 
@@ -91,8 +91,6 @@ export default {
 .footer-socials img {
   width: 50px;
 }
-
-/* Removendo espaço em branco abaixo do footer */
 .footer-container {
   overflow: hidden;
 }

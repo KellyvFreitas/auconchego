@@ -93,6 +93,7 @@ export default {
     return {
       optionsEspecies,
       optionPorte,
+      optionsEstados: ref([]),
       form: ref({
         especies: '',
         sexo: '',
@@ -109,6 +110,14 @@ export default {
     } catch (error) {
       console.error("Erro ao carregar animais:", error);
     }
+    getEstados() {
+      try {
+        const { data } = this.fetchEstados.get()
+        this.optionsEstados = data
+      } catch (e) {
+        console.error("Erro ao carregar animais:", error);
+      }
+    }
 
   }
 
@@ -124,7 +133,7 @@ export default {
 }
 
 .box {
-  background-color: white;
+  background-color: #F3F4F6;
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
