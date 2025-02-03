@@ -1,7 +1,7 @@
 <template>
-    <q-card-section class="footer-container flex-center flex q-pa-none ">
-      <img class="image" style="max-width: 250px;" src="/src/assets/image.png">
-      <div  class="flex-center ">
+    <q-card-section class="footer-container flex-center flex q-pa-none">
+      <img class="image q-mb-lg" style="max-width: 200px;" src="/src/assets/image.png">
+      <div  class="flex-center q-mb-md ">
         <router-link to="/#">
           <q-btn class="buttons" flat label="Página Inicial"></q-btn>
         </router-link>
@@ -10,9 +10,6 @@
         </router-link>
         <router-link to="/quero-ajudar">
           <q-btn class="buttons" flat label="Quero Ajudar"></q-btn>
-        </router-link>
-        <router-link to="/quero-apadrinhar">
-          <q-btn class="buttons" flat label="Quero Apadrinhar"></q-btn>
         </router-link>
         <router-link to="/voluntarios">
           <q-btn class="buttons" flat label="Auconchego"></q-btn>

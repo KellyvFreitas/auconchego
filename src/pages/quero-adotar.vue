@@ -1,6 +1,5 @@
 <template>
   <q-layout>
-    <HeaderComponent />
     <q-card-section class="flex flex-center background">
       <div class="box">
         <div class="row" style="gap: 15px">
@@ -63,7 +62,6 @@
         </q-card-section>
       </div>
     </q-card-section>
-    <FooterComponent />
   </q-layout>
 </template>
 

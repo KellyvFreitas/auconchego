@@ -29,6 +29,10 @@ const routes = [
   {
     path: '/perguntas-frequentes',
     component: () => import('pages/perguntas-frequentes.vue')
+  },
+  {
+    path: '/cadastro-adocao',
+    component: () => import('pages/CadastroAdocao.vue')
   }
 ]
 

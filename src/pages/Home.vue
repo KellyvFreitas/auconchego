@@ -1,8 +1,6 @@
 <template>
   <q-card>
-    <HeaderComponent />
     <SectionHeader />
-    <FooterComponent />
   </q-card>
 </template>
 

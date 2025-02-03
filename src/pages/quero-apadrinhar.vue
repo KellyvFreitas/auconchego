@@ -1,6 +1,5 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <HeaderComponent />
     <span>pagina quero apadrinhar</span>
   </q-layout>
 </template>

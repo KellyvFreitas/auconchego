@@ -1,7 +1,6 @@
 <template>
   <q-layout>
-    <HeaderComponent />
-    <q-card-section class="flex flex-center background">
+    <q-card-section class="flex flex-center background" style="margin-bottom: 80px">
       <div class="box">
         <div class="header">
           <h4><text-highlight color="#BBED2F">Quero Ajudar</text-highlight></h4>
@@ -28,8 +27,6 @@
         <FormasAjudar/>
       </div>
     </q-card-section>
-
-    <FooterComponent />
   </q-layout>
 </template>
 <script>
@@ -46,7 +43,6 @@ import FormasAjudar from "components/FormasAjudar.vue";
 
 <style scoped>
 .background {
-  background-color: #F3F4F6;
   display: flex;
   justify-content: center;
 }
