@@ -28,33 +28,52 @@
         </router-link>
       </div>
     </div>
-
-    <!-- Redes Sociais (Embaixo) -->
     <div class="content">
       <p class="redeSocialText">Nossas Redes Sociais</p>
       <div class="social-icons">
-        <q-btn flat>
-          <img class="imageSocialWhapp" src="src/assets/whatsapp.webp"/>
+        <q-btn
+          flat
+          :href="'https://wa.me/5588996677477?text=' +
+          encodeURIComponent('Olá! Gostaria de mais informações.')"
+          target="_blank"
+        >
+          <img class="imageSocialWhapp" src="src/assets/whatsapp.webp" />
         </q-btn>
-        <q-btn flat>
+        <q-btn
+          flat
+          href="https://www.facebook.com/seuPerfilOuPagina"
+          target="_blank"
+        >
           <img class="imageSocialFace" src="src/assets/facebook.png"/>
         </q-btn>
-        <q-btn flat>
+        <q-btn
+          flat
+          href="https://www.instagram.com/seuPerfil"
+          target="_blank"
+        >
           <img class="imageSocialInsta" src="src/assets/instagram.png"/>
         </q-btn>
       </div>
     </div>
   </q-card-section>
+  <q-card-section class="textFinaly">
+    <p>Projeto Auconcheco - CNPJ 00.000.000/0000-00</p>
+  </q-card-section>
 </template>
+<script>
+export default {
+  name: 'FooterComponent',
+}
+</script>
 
 <style lang="css" scoped>
 .box {
   width: 100%;
   height: 30vh;
-  background-color: #F5FFD9;
+  background-color: #6789AE;
   display: flex;
-  flex-direction: column; /* Empilha os elementos verticalmente */
-  justify-content: space-between; /* Distribui os elementos uniformemente */
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   padding: 20px 0;
 }
@@ -70,7 +89,7 @@
   background-repeat: repeat;
   background-size: 80%;
   background-position: center;
-  opacity: 0.36;
+  opacity: 0.70;
   z-index: 0;
 }
 
@@ -90,41 +109,46 @@
 }
 
 .buttons {
-  color: #3B2B7C;
-  //background-color: rgba(59, 43, 124, 0.3);
-  //border-radius: 10%;
+  color: white;
 }
 
 .content {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centraliza as redes sociais */
+  align-items: center;
   gap: 10px;
   width: 100%;
 }
 
 .redeSocialText {
   font-size: 18px;
-  color: #3B2B7C;
+  color: white;
   text-align: center;
 }
 
 .social-icons {
   display: flex;
-  flex-direction: row; /* Ícones em linha */
-  gap: 15px;
+  flex-direction: row;
 }
 
 .imageSocialWhapp {
+  margin-top: -40px;
   width: 40px;
 }
 .imageSocialFace {
+  margin-top: -40px;
   width: 30px;
 }
 .imageSocialInsta {
-  width: 55px;
+  margin-top: -40px;
+  width: 50px;
+}
+.textFinaly {
+  background-color: #1D1D1D;
+  color: white;
+  text-align: center;
+  height: 38px;
+  font-size: 10px;
 }
 </style>
-<script setup>
-</script>
