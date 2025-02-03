@@ -28,8 +28,6 @@
             option-value="name"
             option-label="name"
           />
-        </div>
-        <div class="row q-mt-md" style="gap: 15px">
           <q-select
             outlined
             :options="optionsEstado"
@@ -37,6 +35,7 @@
             label="Estado"
             option-value="name"
             option-label="name"
+            v-model="form.estado"
           />
           <q-select
             outlined
@@ -45,6 +44,7 @@
             label="Cidade"
             option-value="name"
             option-label="name"
+            v-model="form.cidade"
           />
         </div>
         <q-btn class="button" label="Pesquisar"/>
@@ -125,25 +125,6 @@ export default {
       current: ref(3)
     };
   },
-  // async mounted() {
-  //   try {
-  //     const animais = await service.getAnimais();
-  //     this.animais = animais;
-  //   } catch (error) {
-  //     console.error("Erro ao carregar animais:", error);
-  //   }
-  //   getEstados() {
-  //     try {
-  //       const { data } = this.fetchEstados.get()
-  //       this.optionsEstados = data
-  //     } catch (e) {
-  //       console.error("Erro ao carregar animais:", error);
-  //     }
-  //   }
-  //
-  // }
-
-
 }
 </script>
 
@@ -155,20 +136,19 @@ export default {
 
 .box {
   background-color: #F3F4F6;
-  padding: 10px;
+  padding: 8px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 40vw;
-  width: 100%;
+  width: 80%;
 }
 
 .input {
-  width: 230px;
+  width: 200px;
 }
 
 .button {
-  width: 400px;
-  margin-top: 30px;
+  width: 200px;
+  margin-top: 20px;
 }
 
 .animal-item {

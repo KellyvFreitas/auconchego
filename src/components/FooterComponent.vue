@@ -20,7 +20,7 @@
         </router-link>
       </div>
       <div class="buttons-group">
-        <router-link to="/cadastrar">
+        <router-link to="/cadastro-adocao">
           <q-btn class="buttons" flat label="Cadastre-se"></q-btn>
         </router-link>
         <router-link to="/perguntas-frequentes">
