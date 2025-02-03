@@ -30,8 +30,22 @@
           />
         </div>
         <div class="row q-mt-md" style="gap: 15px">
-          <q-select outlined :options="optionEstado" class="input" label="Estado"/>
-          <q-select outlined :options="optionCidade" class="input" label="Cidade" />
+          <q-select
+            outlined
+            :options="optionsEstado"
+            class="input"
+            label="Estado"
+            option-value="name"
+            option-label="name"
+          />
+          <q-select
+            outlined
+            :options="optionsCidade"
+            class="input"
+            label="Cidade"
+            option-value="name"
+            option-label="name"
+          />
         </div>
         <q-btn class="button" label="Pesquisar"/>
         <q-card-section>
@@ -88,9 +102,19 @@ export default {
       { name: 'Médio' },
       { name: 'Grande' },
     ])
+
+    const optionsEstado = ref([
+      { name : 'CE' }
+    ])
+
+    const optionsCidade = ref([
+      { name : 'Russas' }
+    ])
     return {
       optionsEspecies,
       optionPorte,
+      optionsEstado,
+      optionsCidade,
       optionsEstados: ref([]),
       form: ref({
         especies: '',
@@ -101,23 +125,23 @@ export default {
       current: ref(3)
     };
   },
-  async mounted() {
-    try {
-      const animais = await service.getAnimais();
-      this.animais = animais;
-    } catch (error) {
-      console.error("Erro ao carregar animais:", error);
-    }
-    getEstados() {
-      try {
-        const { data } = this.fetchEstados.get()
-        this.optionsEstados = data
-      } catch (e) {
-        console.error("Erro ao carregar animais:", error);
-      }
-    }
-
-  }
+  // async mounted() {
+  //   try {
+  //     const animais = await service.getAnimais();
+  //     this.animais = animais;
+  //   } catch (error) {
+  //     console.error("Erro ao carregar animais:", error);
+  //   }
+  //   getEstados() {
+  //     try {
+  //       const { data } = this.fetchEstados.get()
+  //       this.optionsEstados = data
+  //     } catch (e) {
+  //       console.error("Erro ao carregar animais:", error);
+  //     }
+  //   }
+  //
+  // }
 
 
 }
@@ -125,7 +149,6 @@ export default {
 
 <style scoped>
 .background {
-  background-color: #F3F4F6;
   display: flex;
   justify-content: center;
 }
