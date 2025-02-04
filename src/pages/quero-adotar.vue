@@ -12,67 +12,73 @@
             option-label="name"
             v-model="form.especies"
           />
-          <q-select
-            outlined
-            :options="['Feminino', 'Masculino']"
-            class="input"
-            label="Selecione o Sexo"
-            v-model="form.sexo"
-          />
-          <q-select
-            outlined
-            :options="optionPorte"
-            class="input"
-            label="Selecione o Porte"
-            v-model="form.porte"
-            option-value="name"
-            option-label="name"
-          />
-          <q-select
-            outlined
-            :options="optionsEstado"
-            class="input"
-            label="Estado"
-            option-value="name"
-            option-label="name"
-            v-model="form.estado"
-          />
-          <q-select
-            outlined
-            :options="optionsCidade"
-            class="input"
-            label="Cidade"
-            option-value="name"
-            option-label="name"
-            v-model="form.cidade"
-          />
+<!--          <q-select-->
+<!--            outlined-->
+<!--            :options="['Feminino', 'Masculino']"-->
+<!--            class="input"-->
+<!--            label="Selecione o Sexo"-->
+<!--            v-model="form.sexo"-->
+<!--          />-->
+<!--          <q-select-->
+<!--            outlined-->
+<!--            :options="optionPorte"-->
+<!--            class="input"-->
+<!--            label="Selecione o Porte"-->
+<!--            v-model="form.porte"-->
+<!--            option-value="name"-->
+<!--            option-label="name"-->
+<!--          />-->
+<!--          <q-select-->
+<!--            outlined-->
+<!--            :options="optionsEstado"-->
+<!--            class="input"-->
+<!--            label="Estado"-->
+<!--            option-value="name"-->
+<!--            option-label="name"-->
+<!--            v-model="form.estado"-->
+<!--          />-->
+<!--          <q-select-->
+<!--            outlined-->
+<!--            :options="optionsCidade"-->
+<!--            class="input"-->
+<!--            label="Cidade"-->
+<!--            option-value="name"-->
+<!--            option-label="name"-->
+<!--            v-model="form.cidade"-->
+<!--          />-->
         </div>
         <q-btn class="button" label="Pesquisar"/>
         <q-card-section>
           <div>
-            <q-list class="row">
-              <q-item
-                v-for="(animal, index) in animais"
-                :key="index"
-                class="animal-item"
-              >
-                <q-card>
-                  <q-card-section>
-                    <q-img :src="animal.foto" :alt="animal.nome" class="animal-image" />
-                  </q-card-section>
-                  <q-card-section class="text-center">
-                    <p class="animal-name">{{ animal.nome }}</p>
-                  </q-card-section>
-                </q-card>
-              </q-item>
-            </q-list>
+              <q-list class="row">
+                <q-item
+                  v-for="(animal, index) in animais"
+                  :key="index"
+                  class="animal-item"
+                >
+                  <q-card>
+                    <q-card-section class="boxAnimal">
+                      <q-img :src="animal.foto" :alt="animal.nome" class="animal-image" />
+                    </q-card-section>
+                    <q-card-section class="text-center">
+                      <p class="animal-name">{{ animal.nome }}</p>
+                      <p class="animal-info">Porte: {{ animal.porte }}</p>
+                      <p class="animal-info">Sexo: {{ animal.sexo }}</p>
+                    </q-card-section>
+                  </q-card>
+                </q-item>
+              </q-list>
           </div>
-          <div class="q-pa-lg flex flex-center">
-            <q-pagination
-              v-model="current"
-              :max="5"
-            />
-          </div>
+            <div class="q-pa-lg flex flex-center">
+              <q-pagination
+                v-model="current"
+                color="teal"
+                :max="5"
+                :max-pages="3"
+                :ellipses="false"
+                :boundary-numbers="false"
+              />
+            </div>
         </q-card-section>
       </div>
     </q-card-section>
@@ -86,6 +92,7 @@ import FooterComponent from "components/FooterComponent.vue";
 import FormasAjudar from "components/FormasAjudar.vue";
 import * as service from "src/service/service";
 import { ref } from 'vue'
+import {getAnimais} from "src/service/service";
 
 export default {
   name: 'QueroAjudar',
@@ -94,7 +101,6 @@ export default {
     const optionsEspecies = ref([
       { name: 'Cachorro' },
       { name: 'Gato' },
-      { name: 'Pássaro' },
     ])
 
     const optionPorte = ref([
@@ -110,6 +116,7 @@ export default {
     const optionsCidade = ref([
       { name : 'Russas' }
     ])
+
     return {
       optionsEspecies,
       optionPorte,
@@ -121,10 +128,19 @@ export default {
         sexo: '',
         porte: '',
       }),
-      animais: [],
+      animais: ref([]),
       current: ref(3)
     };
   },
+  mounted() {
+    this.carregarFotosAnimais()
+  },
+  methods: {
+    carregarFotosAnimais() {
+      this.animais = getAnimais()
+    }
+  },
+
 }
 </script>
 
@@ -137,13 +153,13 @@ export default {
 .box {
   background-color: #F3F4F6;
   padding: 8px;
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 80%;
 }
 
 .input {
-  width: 200px;
+  width: 230px;
 }
 
 .button {
@@ -152,16 +168,29 @@ export default {
 }
 
 .animal-item {
-  display: flex;
-  justify-content: center;
+
 }
 .animal-image {
-  width: 100%;
-  height: 150px;
+  width: 23vh;
+  height: 200px;
   object-fit: cover;
+  border-radius: 10px;
 }
 .animal-name {
-  margin-top: 10px;
   font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
 }
+
+.animal-info-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.animal-info {
+  font-size: 0.9em;
+  color: #666;
+}
+
 </style>
