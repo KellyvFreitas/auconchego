@@ -12,135 +12,129 @@
             option-label="name"
             v-model="form.especies"
           />
-<!--          <q-select-->
-<!--            outlined-->
-<!--            :options="['Feminino', 'Masculino']"-->
-<!--            class="input"-->
-<!--            label="Selecione o Sexo"-->
-<!--            v-model="form.sexo"-->
-<!--          />-->
-<!--          <q-select-->
-<!--            outlined-->
-<!--            :options="optionPorte"-->
-<!--            class="input"-->
-<!--            label="Selecione o Porte"-->
-<!--            v-model="form.porte"-->
-<!--            option-value="name"-->
-<!--            option-label="name"-->
-<!--          />-->
-<!--          <q-select-->
-<!--            outlined-->
-<!--            :options="optionsEstado"-->
-<!--            class="input"-->
-<!--            label="Estado"-->
-<!--            option-value="name"-->
-<!--            option-label="name"-->
-<!--            v-model="form.estado"-->
-<!--          />-->
-<!--          <q-select-->
-<!--            outlined-->
-<!--            :options="optionsCidade"-->
-<!--            class="input"-->
-<!--            label="Cidade"-->
-<!--            option-value="name"-->
-<!--            option-label="name"-->
-<!--            v-model="form.cidade"-->
-<!--          />-->
         </div>
-        <q-btn class="button" label="Pesquisar"/>
+        <q-btn class="button" label="Pesquisar" />
+
+        <!-- Botão de Cadastro (visível apenas para administradores) -->
+        <q-btn
+          v-if="isAdmin"
+          class="button q-mt-md"
+          color="primary"
+          label="Cadastrar Animal"
+          @click="openCadastroAnimal"
+        />
+
         <q-card-section>
           <div>
-              <q-list class="row">
-                <q-item
-                  v-for="(animal, index) in animais"
-                  :key="index"
-                  class="animal-item"
-                >
-                  <q-card>
-                    <q-card-section class="boxAnimal">
-                      <q-img :src="animal.foto" :alt="animal.nome" class="animal-image" />
-                    </q-card-section>
-                    <q-card-section class="text-center">
-                      <p class="animal-name">{{ animal.nome }}</p>
-                      <p class="animal-info">Porte: {{ animal.porte }}</p>
-                      <p class="animal-info">Sexo: {{ animal.sexo }}</p>
-                    </q-card-section>
-                  </q-card>
-                </q-item>
-              </q-list>
+            <q-list class="row">
+              <q-item
+                v-for="(animal, index) in animais"
+                :key="index"
+                class="animal-item"
+              >
+                <q-card>
+                  <q-card-section class="boxAnimal">
+                    <q-img :src="animal.foto" :alt="animal.nome" class="animal-image" />
+                  </q-card-section>
+                  <q-card-section class="text-center">
+                    <p class="animal-name">{{ animal.nome }}</p>
+                    <p class="animal-info">Sexo: {{ animal.sexo }}</p>
+                  </q-card-section>
+                </q-card>
+              </q-item>
+            </q-list>
           </div>
-            <div class="q-pa-lg flex flex-center">
-              <q-pagination
-                v-model="current"
-                color="teal"
-                :max="5"
-                :max-pages="3"
-                :ellipses="false"
-                :boundary-numbers="false"
-              />
-            </div>
+          <div class="q-pa-lg flex flex-center">
+            <q-pagination
+              v-model="current"
+              color="teal"
+              :max="5"
+              :max-pages="3"
+              :ellipses="false"
+              :boundary-numbers="false"
+            />
+          </div>
         </q-card-section>
       </div>
     </q-card-section>
+
+    <!-- Dialog para Cadastrar Animal -->
+    <q-dialog v-model="showDialog">
+      <q-card class="q-pa-md">
+        <q-card-section>
+          <div class="text-h6">Cadastrar Novo Animal</div>
+        </q-card-section>
+        <q-card-section>
+          <q-file
+            v-model="novoAnimal.foto"
+            label="Escolher imagem"
+            accept="image/*"
+            filled
+          />
+          <q-input
+            v-model="novoAnimal.nome"
+            label="Nome do Animal"
+            filled
+            class="q-mt-md"
+          />
+          <q-select
+            v-model="novoAnimal.sexo"
+            :options="['Feminino', 'Masculino']"
+            label="Sexo"
+            filled
+            class="q-mt-md"
+          />
+        </q-card-section>
+        <q-card-actions align="right">
+          <q-btn flat label="Cancelar" v-close-popup />
+          <q-btn color="primary" label="OK" @click="adicionarAnimal" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </q-layout>
 </template>
 
 <script>
-import TextHighlight from "components/TextHighlight.vue";
-import HeaderComponent from "components/HeaderComponent.vue";
-import FooterComponent from "components/FooterComponent.vue";
-import FormasAjudar from "components/FormasAjudar.vue";
-import * as service from "src/service/service";
 import { ref } from 'vue'
-import {getAnimais} from "src/service/service";
+import { getAnimais } from "src/service/service";
 
 export default {
   name: 'QueroAjudar',
-  components: {FormasAjudar, FooterComponent, HeaderComponent, TextHighlight},
   setup() {
-    const optionsEspecies = ref([
-      { name: 'Cachorro' },
-      { name: 'Gato' },
-    ])
+    const isAdmin = ref(true) // Defina como 'true' para simular um administrador
+    const showDialog = ref(false)
+    const animais = ref(getAnimais())
 
-    const optionPorte = ref([
-      { name: 'Pequeno' },
-      { name: 'Médio' },
-      { name: 'Grande' },
-    ])
+    const novoAnimal = ref({
+      foto: '',
+      nome: '',
+      sexo: ''
+    })
 
-    const optionsEstado = ref([
-      { name : 'CE' }
-    ])
+    const openCadastroAnimal = () => {
+      showDialog.value = true
+    }
 
-    const optionsCidade = ref([
-      { name : 'Russas' }
-    ])
+    const adicionarAnimal = () => {
+      if (novoAnimal.value.foto && novoAnimal.value.nome && novoAnimal.value.sexo) {
+        animais.value.push({ ...novoAnimal.value })
+        novoAnimal.value = { foto: '', nome: '', sexo: '' }
+        showDialog.value = false
+      }
+    }
 
     return {
-      optionsEspecies,
-      optionPorte,
-      optionsEstado,
-      optionsCidade,
-      optionsEstados: ref([]),
-      form: ref({
-        especies: '',
-        sexo: '',
-        porte: '',
-      }),
-      animais: ref([]),
+      isAdmin,
+      showDialog,
+      animais,
+      novoAnimal,
+      openCadastroAnimal,
+      adicionarAnimal,
+      optionsEspecies: ref([{ name: 'Cachorro' }, { name: 'Gato' }]),
+      form: ref({ especies: '' }),
       current: ref(3)
-    };
-  },
-  mounted() {
-    this.carregarFotosAnimais()
-  },
-  methods: {
-    carregarFotosAnimais() {
-      this.animais = getAnimais()
     }
-  },
-
+  }
 }
 </script>
 
@@ -168,29 +162,23 @@ export default {
 }
 
 .animal-item {
-
 }
+
 .animal-image {
   width: 23vh;
   height: 200px;
   object-fit: cover;
   border-radius: 10px;
 }
+
 .animal-name {
   font-size: 1.2em;
   font-weight: bold;
   text-align: center;
 }
 
-.animal-info-container {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 10px;
-}
-
 .animal-info {
   font-size: 0.9em;
   color: #666;
 }
-
 </style>
