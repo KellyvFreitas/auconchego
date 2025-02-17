@@ -1,11 +1,10 @@
 <template>
   <q-card-section class="card">
     <div>
-      <p class="titulo text-center">Veja abaixo as formas de ajudar:</p>
-
+      <h6 class="text-center"><text-highlight color="#BBED2F">Veja abaixo as formas de ajudar:</text-highlight></h6>
       <div>
-        <h6 class="titulo-destaque">* Doações via PIX ou transferência</h6>
-        <p class="titulo">
+        <span class="tituloDoacao text-bold">Doações via PIX ou transferência</span>
+        <p class="q-mt-md">
           A cada 25 reais, você ajuda 3 doguinhos ou gatinhos. Para doar, você pode fazer uma transferência bancária ou PIX.
         </p>
 
@@ -27,9 +26,9 @@
         </div>
       </div>
 
-      <div class="q-mt-md">
-        <h6 class="titulo-destaque">* Doações Recorrentes</h6>
-        <p class="titulo">
+      <div class="q-mt-lg">
+        <span class="tituloDoacao text-bold">Doações Recorrentes</span>
+        <p class="q-mt-md">
           Ao contribuir mensalmente, você ainda recebe por e-mail um boletim mensal com prestação de contas das nossas atividades.
         </p>
       </div>
@@ -41,16 +40,16 @@
       </h5>
 
       <div>
-        <p class="titulo text-center">
+        <p class="text-center">
           Neste trabalho conjunto entre <b>Auconchego + Voluntários + Doadores financeiros</b>, já ajudamos mais de 10 mil cachorros e gatos a terem uma cama quentinha para dormir ❤️
         </p>
       </div>
 
-      <p class="text-center titulo q-mt-md">Vem fazer parte desse movimento! 😃</p>
+      <h6 class="text-center q-mt-lg"><text-highlight color="#BBED2F">Vem fazer parte desse movimento! 😃</text-highlight></h6>
 
       <div class="q-mt-md">
-        <span class="subtitulo">Informações administrativas</span>
-        <p class="titulo">
+        <span class="text-bold">Informações administrativas</span>
+        <p>
           O Auconchego surgiu em 2015 como uma iniciativa informal de pessoas apaixonadas por animais.
           Em 2016, foi cadastrada no CNPJ ##.###.###/####-##, recebeu o nome de Auconchego e tornou-se
           oficialmente uma Organização da Sociedade Civil.
@@ -70,6 +69,10 @@ export default {
 </script>
 
 <style scoped>
+.tituloDoacao {
+  font-size: 16px;
+}
+
 .titulo {
   font-size: 16px;
   color: gray;

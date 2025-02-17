@@ -21,6 +21,14 @@
         label="Contatos"
         @click="scrollToFooter"
       />
+      <router-link to="/login">
+        <q-btn
+          label="Entrar"
+          unelevated
+          rounded
+          style="background-color: #BBED2F; width: 20vh; margin-left: 40px"
+        />
+      </router-link>
     </div>
   </q-card-section>
 </template>

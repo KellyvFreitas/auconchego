@@ -33,7 +33,11 @@ const routes = [
   {
     path: '/cadastro-adocao',
     component: () => import('pages/CadastroAdocao.vue')
-  }
+  },
+  {
+    path: '/login',
+    component: () => import('pages/Administrador/TelaLogin.vue')
+  },
 ]
 
 export default routes
