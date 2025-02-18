@@ -2,35 +2,28 @@
   <q-layout>
     <q-card-section class="flex flex-center background">
       <div class="box">
-        <div class="row" style="gap: 15px">
-          <q-select
-            outlined
-            :options="optionsEspecies"
-            class="input"
-            label="Espécies"
-            option-value="name"
-            option-label="name"
-            v-model="form.especies"
-          />
-        </div>
-        <q-btn class="button" label="Pesquisar" />
-
-        <!-- Botão de Cadastro (visível apenas para administradores) -->
-        <q-btn
-          v-if="isAdmin"
-          class="button q-mt-md"
-          color="primary"
-          label="Cadastrar Animal"
-          @click="openCadastroAnimal"
-        />
+<!--        <div class="row" style="gap: 15px">-->
+<!--          <q-select-->
+<!--            outlined-->
+<!--            :options="optionsEspecies"-->
+<!--            class="input"-->
+<!--            label="Espécies"-->
+<!--            option-value="name"-->
+<!--            option-label="name"-->
+<!--            v-model="form.especies"-->
+<!--          />-->
+<!--        </div>-->
+<!--        <q-btn class="button" label="Pesquisar" @click="filtrarAnimais" />-->
 
         <q-card-section>
           <div>
             <q-list class="row">
               <q-item
-                v-for="(animal, index) in animais"
+                v-for="(animal, index) in paginatedAnimals"
                 :key="index"
                 class="animal-item"
+                @click="openModalQueroAdotar(animal)"
+                clickable
               >
                 <q-card>
                   <q-card-section class="boxAnimal">
@@ -48,7 +41,7 @@
             <q-pagination
               v-model="current"
               color="teal"
-              :max="5"
+              :max="maxPages"
               :max-pages="3"
               :ellipses="false"
               :boundary-numbers="false"
@@ -58,81 +51,75 @@
       </div>
     </q-card-section>
 
-    <!-- Dialog para Cadastrar Animal -->
     <q-dialog v-model="showDialog">
-      <q-card class="q-pa-md">
-        <q-card-section>
-          <div class="text-h6">Cadastrar Novo Animal</div>
-        </q-card-section>
-        <q-card-section>
-          <q-file
-            v-model="novoAnimal.foto"
-            label="Escolher imagem"
-            accept="image/*"
-            filled
-          />
-          <q-input
-            v-model="novoAnimal.nome"
-            label="Nome do Animal"
-            filled
-            class="q-mt-md"
-          />
-          <q-select
-            v-model="novoAnimal.sexo"
-            :options="['Feminino', 'Masculino']"
-            label="Sexo"
-            filled
-            class="q-mt-md"
-          />
-        </q-card-section>
-        <q-card-actions align="right">
-          <q-btn flat label="Cancelar" v-close-popup />
-          <q-btn color="primary" label="OK" @click="adicionarAnimal" />
-        </q-card-actions>
-      </q-card>
+      <modal-quero-adotar
+        :animal="selectedAnimal"
+        @adotar="adotarAnimal"
+      />
     </q-dialog>
   </q-layout>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { getAnimais } from "src/service/service";
+import { Dialog } from "quasar";
+import ModalQueroAdotar from "components/ModalQueroAdotar.vue";
 
 export default {
   name: 'QueroAjudar',
+  components: {
+    ModalQueroAdotar
+  },
   setup() {
-    const isAdmin = ref(true) // Defina como 'true' para simular um administrador
     const showDialog = ref(false)
-    const animais = ref(getAnimais())
+    const selectedAnimal = ref(null)
 
-    const novoAnimal = ref({
-      foto: '',
-      nome: '',
-      sexo: ''
+    const animais = ref(getAnimais())
+    const form = ref({
+      especies: ''
+    })
+    const current = ref(1)
+    const itemsPerPage = 10
+    const maxPages = computed(() => Math.ceil(filteredAnimals.value.length / itemsPerPage))
+
+    const filteredAnimals = computed(() => {
+      if (!form.value.especies) return animais.value
+      return animais.value.filter(animal => animal.especie === form.value.especies)
     })
 
-    const openCadastroAnimal = () => {
+    const paginatedAnimals = computed(() => {
+      const startIndex = (current.value - 1) * itemsPerPage
+      const endIndex = startIndex + itemsPerPage
+      return filteredAnimals.value.slice(startIndex, endIndex)
+    })
+
+    const openModalQueroAdotar = (animal) => {
+      selectedAnimal.value = animal
       showDialog.value = true
     }
 
-    const adicionarAnimal = () => {
-      if (novoAnimal.value.foto && novoAnimal.value.nome && novoAnimal.value.sexo) {
-        animais.value.push({ ...novoAnimal.value })
-        novoAnimal.value = { foto: '', nome: '', sexo: '' }
-        showDialog.value = false
-      }
+    const adotarAnimal = (animal) => {
+      console.log('Animal adotado:', animal)
+      showDialog.value = false
+    }
+
+    const filtrarAnimais = () => {
+      current.value = 1
     }
 
     return {
-      isAdmin,
-      showDialog,
       animais,
-      novoAnimal,
-      openCadastroAnimal,
-      adicionarAnimal,
+      form,
+      current,
+      maxPages,
+      paginatedAnimals,
+      showDialog,
+      selectedAnimal,
+      openModalQueroAdotar,
+      adotarAnimal,
       optionsEspecies: ref([{ name: 'Cachorro' }, { name: 'Gato' }]),
-      form: ref({ especies: '' }),
-      current: ref(3)
+      filtrarAnimais
     }
   }
 }
