@@ -21,14 +21,6 @@
         label="Contatos"
         @click="scrollToFooter"
       />
-      <router-link to="/login">
-        <q-btn
-          label="Entrar"
-          unelevated
-          rounded
-          style="background-color: #BBED2F; width: 20vh; margin-left: 40px"
-        />
-      </router-link>
     </div>
   </q-card-section>
 </template>
@@ -55,6 +47,7 @@ export default {
 .buttons {
   color: white;
 }
+
 .footer-container {
   width: 100%;
   padding-bottom: 40px;
@@ -65,5 +58,23 @@ export default {
   clip-path: path("M0,0 L0,150 Q600,250 1200,200 T2400,200 L2400,0 Z");
   box-sizing: border-box;
   background: linear-gradient(100deg, #5a41a0, #3a2a7a);
+}
+
+/* Media query para dispositivos móveis */
+@media (max-width: 768px) {
+  .image {
+    display: none;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 20px;
+  }
+
+  .buttons {
+    margin: 10px 0;
+  }
 }
 </style>

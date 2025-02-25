@@ -19,14 +19,14 @@
           <q-btn class="buttons" flat label="Sobre o Projeto"></q-btn>
         </router-link>
       </div>
-<!--      <div class="buttons-group">-->
-<!--        <router-link to="/cadastro-adocao">-->
-<!--          <q-btn class="buttons" flat label="Cadastre-se"></q-btn>-->
-<!--        </router-link>-->
-<!--        <router-link to="/perguntas-frequentes">-->
-<!--          <q-btn class="buttons" flat label="Perguntas Frequentes"></q-btn>-->
-<!--        </router-link>-->
-<!--      </div>-->
+      <div class="buttons-group">
+        <router-link to="/cadastro-adocao">
+          <q-btn class="buttons" flat label="Cadastro para Adoção"></q-btn>
+        </router-link>
+        <router-link to="/perguntas-frequentes">
+          <q-btn class="buttons" flat label="Perguntas Frequentes"></q-btn>
+        </router-link>
+      </div>
     </div>
     <div class="content">
       <p class="redeSocialText">Nossas Redes Sociais</p>
@@ -60,6 +60,7 @@
     <p>Projeto Auconcheco - CNPJ 00.000.000/0000-00</p>
   </q-card-section>
 </template>
+
 <script>
 export default {
   name: 'FooterComponent',
@@ -130,20 +131,32 @@ export default {
 .social-icons {
   display: flex;
   flex-direction: row;
+  gap: 10px;
+  justify-content: center;
 }
 
 .imageSocialWhapp {
-  margin-top: -40px;
   width: 40px;
 }
 .imageSocialFace {
-  margin-top: -40px;
   width: 30px;
 }
 .imageSocialInsta {
-  margin-top: -40px;
   width: 50px;
 }
+
+@media (max-width: 600px) {
+  .social-icons {
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-around;
+  }
+
+  .imageSocialWhapp, .imageSocialFace, .imageSocialInsta {
+    width: 40px;
+  }
+}
+
 .textFinaly {
   background-color: #1D1D1D;
   color: white;

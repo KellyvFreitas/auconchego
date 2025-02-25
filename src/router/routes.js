@@ -3,9 +3,6 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
   },
-
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: '/quero-ajudar',
     component: () => import('pages/quero-ajudar.vue')

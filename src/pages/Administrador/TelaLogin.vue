@@ -16,6 +16,7 @@
         />
 
         <q-input
+          v-if="!isPasswordReset"
           label="Senha"
           outlined
           v-model="senha"
@@ -32,13 +33,13 @@
           </template>
         </q-input>
 
-        <q-btn class="q-mt-lg btn-login" label="Entrar" @click="handleLogin" />
+        <q-btn class="q-mt-lg btn-login" :label="isPasswordReset ? 'Solicitar reset de senha' : 'Entrar'" @click="handleLogin" />
 
         <div class="actions">
           <router-link to="/cadastro-adocao">
             <q-btn flat class="btn-link" label="Não sou cadastrado" />
           </router-link>
-          <q-btn flat class="btn-link" label="Esqueceu sua senha?" />
+          <q-btn flat class="btn-link" label="Esqueceu sua senha?" @click="forgotPassword" />
         </div>
       </q-form>
     </div>
@@ -52,7 +53,8 @@ export default {
     return {
       email: '',
       senha: '',
-      isPasswordVisible: false
+      isPasswordVisible: false,
+      isPasswordReset: false
     };
   },
   methods: {
@@ -60,19 +62,31 @@ export default {
       this.isPasswordVisible = !this.isPasswordVisible;
     },
     handleLogin() {
-      // Lógica para login (simulação)
-      if (!this.email || !this.senha) {
+      // Lógica para login ou reset de senha
+      if (this.isPasswordReset) {
+        // Lógica para solicitar reset de senha
         this.$q.notify({
-          type: 'negative',
-          message: 'Preencha todos os campos!'
+          type: 'positive',
+          message: 'Instruções para reset de senha enviadas!'
         });
-        return;
-      }
+      } else {
+        if (!this.email || !this.senha) {
+          this.$q.notify({
+            type: 'negative',
+            message: 'Preencha todos os campos!'
+          });
+          return;
+        }
 
-      this.$q.notify({
-        type: 'positive',
-        message: 'Login realizado com sucesso!'
-      });
+        this.$q.notify({
+          type: 'positive',
+          message: 'Login realizado com sucesso!'
+        });
+      }
+    },
+    forgotPassword() {
+      // Muda para o estado de reset de senha
+      this.isPasswordReset = true;
     }
   }
 }
@@ -121,7 +135,6 @@ export default {
   margin-bottom: 20px;
 }
 
-/* Formulário */
 .form {
   width: 80%;
   max-width: 400px;
