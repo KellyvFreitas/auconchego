@@ -1,4 +1,4 @@
-![Captura de tela 2025-05-08 081535](https://github.com/user-attachments/assets/7d38b43b-5d0c-47f4-98b2-1d7fbb0f0645)# Projeto de Adoção de Animais: Auconchego
+# Projeto de Adoção de Animais: Auconchego
 Site para adoção de animais desenvolvido com Vue 3 e Quasar.
 Este projeto tem como objetivo facilitar a adoção de animais, proporcionando uma plataforma intuitiva e acessível para conectar pessoas interessadas em adotar com animais que precisam de um novo lar.
 
